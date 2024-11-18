@@ -13,6 +13,7 @@ const Footer = () => {
           Developed by{" "}
           <Link
             href="https://erfanweb.vercel.app/"
+            target="_blank"
             className="hover:text-muted-foreground"
           >
             Erfan Heshmati
