@@ -6,11 +6,11 @@ import ProductPrice from "@/components/shared/product/product-price";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
-import { getProductBySlug } from "@/lib/actions/product.actions";
+import { getProductBySlug } from "@/lib/actions/product-actions";
 import { APP_NAME } from "@/lib/constants";
 import AddToCart from "@/components/shared/product/add-to-cart";
-import { getMyCart } from "@/lib/actions/cart.actions";
-import { round2 } from "@/lib/utils";
+import { getMyCart } from "@/lib/actions/cart-actions";
+import { getStars, round2 } from "@/lib/utils";
 
 export async function generateMetadata({
   params,
@@ -55,7 +55,10 @@ const ProductDetails = async ({
               </p>
               <h1 className="h3-bold">{product.name}</h1>
               <p>
-                {product.rating} of {product.numReviews} reviews
+                <p className="text-sm">{product.numReviews} reviews</p>
+                <p className="text-yellow-500 text-xl font-bold">
+                  {getStars(Number(product.rating))}
+                </p>
               </p>
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">

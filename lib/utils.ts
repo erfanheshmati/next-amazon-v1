@@ -98,3 +98,14 @@ export const round2 = (value: number | string) => {
     throw new Error("value is not a number nor a string");
   }
 };
+
+export const getStars = (value: number) => {
+  const fullStars = Math.floor(value); // number of full stars
+  const halfStar = value % 1 >= 0.5 ? 1 : 0; // add a half star if necessary
+  const emptyStars = 5 - fullStars - halfStar; // remaining empty stars
+  return (
+    "★".repeat(fullStars) + // full-stars
+    (halfStar ? "⯪" : "") + // half-star
+    "☆".repeat(emptyStars) // empty-stars
+  );
+};
