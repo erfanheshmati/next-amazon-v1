@@ -7,19 +7,19 @@ import ProductPrice from "./product-price";
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
-    <Card className="w-full max-w-sm">
-      <CardHeader className="p-0 items-center">
+    <Card className="flex flex-row sm:flex-col">
+      <CardHeader className="p-0 items-center w-2/5 sm:w-full">
         <Link href={`/product/${product.slug}`}>
           <Image
-            alt={product.name}
-            className="aspect-square object-cover rounded-t"
-            height={300}
             src={product.images![0]}
+            alt={product.name}
             width={300}
+            height={300}
+            className="w-full object-cover rounded-l sm:rounded-t"
           />
         </Link>
       </CardHeader>
-      <CardContent className="p-3 grid gap-3">
+      <CardContent className="p-3 grid gap-3 w-3/5 sm:w-full">
         <div>
           <p className="text-xs bg-gray-100 w-fit rounded px-2 py-1">
             {product.brand}
@@ -33,11 +33,14 @@ const ProductCard = ({ product }: { product: Product }) => {
           </Link>
         </div>
         <div className="flex-between gap-4">
-          <p>{product.rating} stars</p>
+          <p className="flex items-center gap-1">
+            <span className="text-yellow-500 text-lg font-bold">★</span>
+            <span className="text-sm">{Number(product.rating).toFixed(1)}</span>
+          </p>
           {product.stock > 0 ? (
             <ProductPrice value={Number(product.price)} />
           ) : (
-            <p className="text-destructive text-sm">out of stock</p>
+            <p className="text-destructive text-sm">Out of stock</p>
           )}
         </div>
       </CardContent>
