@@ -5,7 +5,7 @@ const Menu = () => {
   return (
     <>
       <div className="flex justify-end gap-3">
-        <nav className="md:flex hidden w-full max-w-xs gap-2">
+        <nav className="flex w-full max-w-xs gap-2">
           <CartButton />
           <UserButton />
         </nav>
