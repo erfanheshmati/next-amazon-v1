@@ -27,6 +27,7 @@ export default async function PlaceOrderPage() {
   const cart = await getMyCart();
   const session = await auth();
   const user = await getUserById(session?.user.id!);
+
   if (!cart || cart.items.length === 0) redirect("/cart");
   if (!user.address) redirect("/shipping-address");
   if (!user.paymentMethod) redirect("/payment-method");
@@ -34,6 +35,7 @@ export default async function PlaceOrderPage() {
   return (
     <>
       <CheckoutSteps current={3} />
+
       <h1 className="mt-12 text-2xl">Place Order</h1>
 
       <div className="grid md:grid-cols-3 md:gap-5 my-4">
@@ -55,6 +57,7 @@ export default async function PlaceOrderPage() {
               </div>
             </CardContent>
           </Card>
+
           <Card>
             <CardContent className="p-4 gap-4">
               <h2 className="text-xl pb-4">Payment Method</h2>
@@ -68,6 +71,7 @@ export default async function PlaceOrderPage() {
               </div>
             </CardContent>
           </Card>
+
           <Card>
             <CardContent className="p-4 gap-4">
               <h2 className="text-xl pb-4">Order Items</h2>
@@ -114,6 +118,7 @@ export default async function PlaceOrderPage() {
             </CardContent>
           </Card>
         </div>
+        
         <div>
           <Card>
             <CardContent className="p-4 gap-4 space-y-4">

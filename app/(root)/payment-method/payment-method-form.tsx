@@ -57,6 +57,7 @@ export default function PaymentMethodForm({
   return (
     <>
       <CheckoutSteps current={2} />
+
       <div className="max-w-md mx-auto mt-12">
         <Form {...form}>
           <form

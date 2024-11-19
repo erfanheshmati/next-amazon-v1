@@ -43,9 +43,10 @@ export default function CredentialsSignInForm() {
             id="email"
             name="email"
             placeholder="Enter your email address"
-            required
             type="email"
             defaultValue={signInDefaultValues.email}
+            autoComplete="off"
+            required
           />
         </div>
         <div className="relative">
@@ -54,9 +55,10 @@ export default function CredentialsSignInForm() {
             id="password"
             name="password"
             placeholder="Enter your password"
-            required
             type={showPassword ? "text" : "password"}
             defaultValue={signInDefaultValues.password}
+            autoComplete="off"
+            required
           />
           <button
             type="button"

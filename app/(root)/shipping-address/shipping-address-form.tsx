@@ -37,6 +37,7 @@ export default function ShippingAddressForm({
   const { toast } = useToast();
 
   const [isPending, startTransition] = useTransition();
+
   const onSubmit: SubmitHandler<ShippingAddress> = async (values) => {
     startTransition(async () => {
       const res = await updateUserAddress(values);
@@ -54,6 +55,7 @@ export default function ShippingAddressForm({
   return (
     <>
       <CheckoutSteps current={1} />
+
       <div className="max-w-md mx-auto space-y-4">
         <h1 className="h2-bold mt-12">Shipping Address</h1>
         <p className="text-sm text-muted-foreground">

@@ -13,5 +13,6 @@ export const metadata: Metadata = {
 export default async function PaymentMethodPage() {
   const session = await auth();
   const user = await getUserById(session?.user.id!);
+
   return <PaymentMethodForm preferredPaymentMethod={user.paymentMethod} />;
 }

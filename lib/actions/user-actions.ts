@@ -93,7 +93,9 @@ export async function updateUserAddress(data: ShippingAddress) {
 
     const address = shippingAddressSchema.parse(data);
     await db.update(users).set({ address }).where(eq(users.id, currentUser.id));
+
     revalidatePath("/place-order");
+
     return {
       success: true,
       message: "User updated successfully",

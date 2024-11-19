@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Loader } from "lucide-react";
+import { ArrowRight, Loader } from "lucide-react";
 import { useFormState, useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { createOrder } from "@/lib/actions/order-actions";
@@ -18,7 +18,7 @@ export default function PlaceOrderForm() {
         {pending ? (
           <Loader className="w-4 h-4 animate-spin" />
         ) : (
-          <Check className="w-4 h-4" />
+          <ArrowRight className="w-4 h-4" />
         )}{" "}
         Place Order
       </Button>
