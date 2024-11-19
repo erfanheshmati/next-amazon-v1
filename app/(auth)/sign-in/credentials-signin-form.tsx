@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label";
 import { signInWithCredentials } from "@/lib/actions/user-actions";
 import { signInDefaultValues } from "@/lib/constants";
 import Link from "next/link";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function CredentialsSignInForm() {
   const [data, action] = useFormState(signInWithCredentials, {
@@ -18,6 +20,9 @@ export default function CredentialsSignInForm() {
 
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
 
   const SignInButton = () => {
     const { pending } = useFormStatus();
@@ -31,29 +36,38 @@ export default function CredentialsSignInForm() {
   return (
     <form action={action}>
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
-      <div className="space-y-6">
+      <div className="space-y-4">
         <div>
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
             name="email"
-            placeholder="m@example.com"
+            placeholder="Enter your email address"
             required
             type="email"
             defaultValue={signInDefaultValues.email}
           />
         </div>
-        <div>
+        <div className="relative">
           <Label htmlFor="password">Password</Label>
           <Input
             id="password"
             name="password"
+            placeholder="Enter your password"
             required
-            type="password"
+            type={showPassword ? "text" : "password"}
             defaultValue={signInDefaultValues.password}
           />
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute right-2 top-8 text-2xl text-gray-600 hover:text-black"
+          >
+            {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
+          </button>
         </div>
-        <div>
+
+        <div className="pt-2">
           <SignInButton />
         </div>
 

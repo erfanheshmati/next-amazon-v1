@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { signUp } from "@/lib/actions/user-actions";
 import { signUpDefaultValues } from "@/lib/constants";
+import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function SignUpForm() {
   const [data, action] = useFormState(signUp, {
@@ -18,6 +20,13 @@ export default function SignUpForm() {
 
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const togglePasswordVisibility = () => setShowPassword((prev) => !prev);
+  const toggleConfirmPasswordVisibility = () =>
+    setShowConfirmPassword((prev) => !prev);
 
   const SignUpButton = () => {
     const { pending } = useFormStatus();
@@ -31,13 +40,13 @@ export default function SignUpForm() {
   return (
     <form action={action}>
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
-      <div className="space-y-6">
+      <div className="space-y-4">
         <div>
           <Label htmlFor="name">Name</Label>
           <Input
             id="name"
             name="name"
-            placeholder="John Doe"
+            placeholder="Enter your full name"
             required
             type="text"
             defaultValue={signUpDefaultValues.name}
@@ -48,34 +57,50 @@ export default function SignUpForm() {
           <Input
             id="email"
             name="email"
-            placeholder="john@example.com"
+            placeholder="Enter your email address"
             required
             type="email"
             defaultValue={signUpDefaultValues.email}
           />
         </div>
-        <div>
+        <div className="relative">
           <Label htmlFor="password">Password</Label>
           <Input
             id="password"
             name="password"
+            placeholder="Enter your password"
             required
-            type="password"
+            type={showPassword ? "text" : "password"}
             defaultValue={signUpDefaultValues.password}
           />
+          <button
+            type="button"
+            onClick={togglePasswordVisibility}
+            className="absolute right-2 top-8 text-2xl text-gray-600 hover:text-black"
+          >
+            {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
+          </button>
         </div>
-        <div>
+        <div className="relative">
           <Label htmlFor="confirmPassword">Confirm Password</Label>
           <Input
             id="confirmPassword"
             name="confirmPassword"
+            placeholder="Repeat your password"
             required
-            type="password"
+            type={showConfirmPassword ? "text" : "password"}
             defaultValue={signUpDefaultValues.confirmPassword}
           />
+          <button
+            type="button"
+            onClick={toggleConfirmPasswordVisibility}
+            className="absolute right-2 top-8 text-2xl text-gray-600 hover:text-black"
+          >
+            {showConfirmPassword ? <EyeOff size={22} /> : <Eye size={22} />}
+          </button>
         </div>
 
-        <div>
+        <div className="pt-2">
           <SignUpButton />
         </div>
 
