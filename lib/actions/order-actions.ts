@@ -1,8 +1,8 @@
 "use server";
 
 import { auth } from "@/auth";
-import { getMyCart } from "./cart.actions";
-import { getUserById } from "./user.actions";
+import { getMyCart } from "./cart-actions";
+import { getUserById } from "./user-actions";
 import { redirect } from "next/navigation";
 import { insertOrderSchema } from "../validator";
 import db from "@/db/drizzle";

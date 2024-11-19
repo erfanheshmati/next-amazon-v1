@@ -10,8 +10,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { getMyCart } from "@/lib/actions/cart.actions";
-import { getUserById } from "@/lib/actions/user.actions";
+import { getMyCart } from "@/lib/actions/cart-actions";
+import { getUserById } from "@/lib/actions/user-actions";
 import { APP_NAME } from "@/lib/constants";
 import { formatCurrency } from "@/lib/utils";
 import Image from "next/image";

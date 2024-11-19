@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/hooks/use-toast";
-import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions";
+import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart-actions";
 import { Cart, CartItem } from "@/types";
 import { Loader, Minus, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";

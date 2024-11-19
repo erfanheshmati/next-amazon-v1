@@ -1,7 +1,7 @@
 "use client";
 
 import { useToast } from "@/components/hooks/use-toast";
-import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions";
+import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart-actions";
 import { formatCurrency } from "@/lib/utils";
 import { Cart } from "@/types";
 import { ArrowRight, Loader, Minus, Plus } from "lucide-react";

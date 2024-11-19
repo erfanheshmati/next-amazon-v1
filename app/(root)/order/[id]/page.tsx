@@ -1,4 +1,4 @@
-import { getOrderById } from "@/lib/actions/order.actions";
+import { getOrderById } from "@/lib/actions/order-actions";
 import { APP_NAME } from "@/lib/constants";
 import { notFound } from "next/navigation";
 import OrderDetailsForm from "./order-details-form";

@@ -23,8 +23,8 @@ export async function signUp(prevState: unknown, formData: FormData) {
     const user = signUpFormSchema.parse({
       name: formData.get("name"),
       email: formData.get("email"),
-      confirmPassword: formData.get("confirmPassword"),
       password: formData.get("password"),
+      confirmPassword: formData.get("confirmPassword"),
     });
     const values = {
       id: crypto.randomUUID(),

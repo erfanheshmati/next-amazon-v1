@@ -8,7 +8,7 @@ import { shippingAddressSchema } from "@/lib/validator";
 import { shippingAddressDefaultValues } from "@/lib/constants";
 import { useToast } from "@/components/hooks/use-toast";
 import { useTransition } from "react";
-import { updateUserAddress } from "@/lib/actions/user.actions";
+import { updateUserAddress } from "@/lib/actions/user-actions";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader } from "lucide-react";

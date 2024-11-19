@@ -14,7 +14,7 @@ import { useToast } from "@/hooks/use-toast";
 import {
   approvePayPalOrder,
   createPayPalOrder,
-} from "@/lib/actions/order.actions";
+} from "@/lib/actions/order-actions";
 import { formatCurrency, formatDateTime, formatId } from "@/lib/utils";
 import { Order } from "@/types";
 import Image from "next/image";

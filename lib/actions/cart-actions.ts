@@ -45,7 +45,9 @@ export const addItemToCart = async (data: CartItem) => {
         sessionCartId: sessionCartId,
         ...calcPrice([item]),
       });
+
       revalidatePath(`/product/${product.slug}`);
+
       return {
         success: true,
         message: "Item added to cart successfully",
@@ -70,6 +72,7 @@ export const addItemToCart = async (data: CartItem) => {
         .where(eq(carts.id, cart.id));
 
       revalidatePath(`/product/${product.slug}`);
+
       return {
         success: true,
         message: `${product.name} ${
@@ -85,8 +88,11 @@ export const addItemToCart = async (data: CartItem) => {
 export async function getMyCart() {
   const sessionCartId = cookies().get("sessionCartId")?.value;
   if (!sessionCartId) return undefined;
+
   const session = await auth();
+  if (!session || !session.user) return undefined;
   const userId = session?.user.id;
+
   const cart = await db.query.carts.findFirst({
     where: userId
       ? eq(carts.userId, userId)

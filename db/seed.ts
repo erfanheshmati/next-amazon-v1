@@ -15,8 +15,8 @@ const main = async () => {
       connectionString: process.env.POSTGRES_URL,
     });
     await client.connect();
-    const db = drizzle(client);
 
+    const db = drizzle(client);
     await db.delete(schema.accounts);
     await db.delete(schema.users);
     await db.delete(schema.products);
@@ -30,6 +30,7 @@ const main = async () => {
       .insert(schema.products)
       .values(sampleData.products)
       .returning();
+
     console.log({ resProducts, resUsers });
     await client.end();
   } catch (error) {
