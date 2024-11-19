@@ -29,3 +29,5 @@ export const shippingAddressDefaultValues = {
   postalCode: "",
   country: "",
 };
+
+export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 3
