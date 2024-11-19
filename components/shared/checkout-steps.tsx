@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { Check } from "lucide-react";
 
 const CheckoutSteps = ({ current = 0 }) => {
   return (
@@ -9,11 +10,14 @@ const CheckoutSteps = ({ current = 0 }) => {
           <React.Fragment key={step}>
             <div
               className={cn(
-                "p-2 w-56 rounded-full text-center  text-sm",
+                "p-2 w-56 rounded-full text-center text-sm",
                 index === current ? "bg-secondary" : ""
               )}
             >
-              {step}
+              <span className="flex items-center justify-center gap-1">
+                {step}
+                {index < current ? <Check size={16} color="green" /> : ""}
+              </span>
             </div>
             {step !== "Place Order" && (
               <hr className="w-16 border-t border-gray-300 mx-2" />
