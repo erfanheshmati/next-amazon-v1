@@ -27,6 +27,7 @@ export default function AddToCart({
       <Button
         type="button"
         variant="outline"
+        size="icon"
         disabled={isPending}
         onClick={() => {
           startTransition(async () => {
@@ -49,6 +50,7 @@ export default function AddToCart({
       <Button
         type="button"
         variant="outline"
+        size="icon"
         disabled={isPending}
         onClick={() => {
           startTransition(async () => {

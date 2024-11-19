@@ -122,6 +122,7 @@ export const removeItemFromCart = async (productId: string) => {
     } else {
       cart.items.find((x) => x.productId === productId)!.qty = exist.qty - 1;
     }
+    
     await db
       .update(carts)
       .set({
@@ -129,7 +130,9 @@ export const removeItemFromCart = async (productId: string) => {
         ...calcPrice(cart.items),
       })
       .where(eq(carts.id, cart.id));
+
     revalidatePath(`/product/${product.slug}`);
+
     return {
       success: true,
       message: `${product.name}  ${

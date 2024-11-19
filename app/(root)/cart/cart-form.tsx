@@ -30,8 +30,11 @@ export default function CartForm({ cart }: { cart?: Cart }) {
       <h1 className="py-4 h2-bold">Shopping Cart</h1>
 
       {!cart || cart.items.length === 0 ? (
-        <div>
-          Cart is empty. <Link href="/">Go shopping</Link>
+        <div className="flex gap-1">
+          Cart is empty.
+          <Link href="/" className="flex items-center gap-1">
+            Go shopping <ArrowRight size={15} />
+          </Link>
         </div>
       ) : (
         <div className="grid lg:grid-cols-4 lg:gap-10">
@@ -66,6 +69,7 @@ export default function CartForm({ cart }: { cart?: Cart }) {
                         disabled={isPending}
                         variant="outline"
                         type="button"
+                        size="icon"
                         onClick={() =>
                           startTransition(async () => {
                             const res = await removeItemFromCart(
@@ -81,7 +85,7 @@ export default function CartForm({ cart }: { cart?: Cart }) {
                         }
                       >
                         {isPending ? (
-                          <Loader className="w-4 h-4  animate-spin" />
+                          <Loader className="w-4 h-4 animate-spin" />
                         ) : (
                           <Minus className="w-4 h-4" />
                         )}
@@ -91,6 +95,7 @@ export default function CartForm({ cart }: { cart?: Cart }) {
                         disabled={isPending}
                         variant="outline"
                         type="button"
+                        size="icon"
                         onClick={() =>
                           startTransition(async () => {
                             const res = await addItemToCart(item);
@@ -104,7 +109,7 @@ export default function CartForm({ cart }: { cart?: Cart }) {
                         }
                       >
                         {isPending ? (
-                          <Loader className="w-4 h-4  animate-spin" />
+                          <Loader className="w-4 h-4 animate-spin" />
                         ) : (
                           <Plus className="w-4 h-4" />
                         )}
@@ -124,10 +129,8 @@ export default function CartForm({ cart }: { cart?: Cart }) {
               <CardContent className="p-4 gap-4">
                 <div className="mb-3 space-y-1">
                   <p className="text-lg">
-                    Total quantity: {cart.items.reduce((a, c) => a + c.qty, 0)}
-                  </p>
-                  <p className="text-lg">
-                    Subtotal: {formatCurrency(cart.itemsPrice)}
+                    Subtotal ({cart.items.reduce((a, c) => a + c.qty, 0)}{" "}
+                    items): {formatCurrency(cart.itemsPrice)}
                   </p>
                 </div>
                 <Button
