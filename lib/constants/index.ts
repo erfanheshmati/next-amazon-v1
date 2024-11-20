@@ -30,4 +30,4 @@ export const shippingAddressDefaultValues = {
   country: "",
 };
 
-export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 3
+export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 5;

@@ -24,7 +24,7 @@ export default async function AdminLayout({
               />
             </Link>
 
-            <MainNav className="ml-4" />
+            <MainNav className="" />
 
             <div className="ml-auto flex items-center space-x-4">
               <Menu />

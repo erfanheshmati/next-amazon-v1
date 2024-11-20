@@ -56,11 +56,15 @@ export async function getMyOrders({
 
 export async function getOrderSummary() {
   const ordersCount = await db.select({ count: count() }).from(orders);
+
   const productsCount = await db.select({ count: count() }).from(products);
+
   const usersCount = await db.select({ count: count() }).from(users);
+
   const ordersPrice = await db
     .select({ sum: sum(orders.totalPrice) })
     .from(orders);
+
   const salesData = await db
     .select({
       months: sql<string>`to_char(${orders.createdAt},'MM/YY')`,
@@ -68,6 +72,7 @@ export async function getOrderSummary() {
     })
     .from(orders)
     .groupBy(sql`1`);
+
   const latestOrders = await db.query.orders.findMany({
     orderBy: [desc(orders.createdAt)],
     with: {
@@ -75,6 +80,7 @@ export async function getOrderSummary() {
     },
     limit: 6,
   });
+
   return {
     ordersCount,
     productsCount,
@@ -82,6 +88,28 @@ export async function getOrderSummary() {
     ordersPrice,
     salesData,
     latestOrders,
+  };
+}
+
+export async function getAllOrders({
+  limit = PAGE_SIZE,
+  page,
+}: {
+  limit?: number;
+  page: number;
+}) {
+  const data = await db.query.orders.findMany({
+    orderBy: [desc(products.createdAt)],
+    limit,
+    offset: (page - 1) * limit,
+    with: { user: { columns: { name: true } } },
+  });
+
+  const dataCount = await db.select({ count: count() }).from(orders);
+
+  return {
+    data,
+    totalPages: Math.ceil(dataCount[0].count / limit),
   };
 }
 
@@ -242,3 +270,19 @@ export const updateOrderToPaid = async ({
       .where(eq(orders.id, orderId));
   });
 };
+
+// DELETE
+export async function deleteOrder(id: string) {
+  try {
+    await db.delete(orders).where(eq(orders.id, id));
+
+    revalidatePath("/admin/orders");
+
+    return {
+      success: true,
+      message: "Order deleted successfully",
+    };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
+}
