@@ -25,6 +25,8 @@ export default function CartForm({ cart }: { cart?: Cart }) {
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
+  const subTotal = cart?.items.reduce((a, c) => a + c.qty, 0);
+
   return (
     <>
       <h1 className="py-4 h2-bold">Shopping Cart</h1>
@@ -129,8 +131,9 @@ export default function CartForm({ cart }: { cart?: Cart }) {
               <CardContent className="p-4 gap-4">
                 <div className="mb-3 space-y-1">
                   <p className="text-lg">
-                    Subtotal ({cart.items.reduce((a, c) => a + c.qty, 0)}{" "}
-                    items): {formatCurrency(cart.itemsPrice)}
+                    Subtotal (
+                    {subTotal === 1 ? `${subTotal} item` : `${subTotal} items`}
+                    ): {formatCurrency(cart.itemsPrice)}
                   </p>
                 </div>
                 <Button
