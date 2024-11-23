@@ -8,7 +8,7 @@ import { users } from "@/db/schema";
 import { formatError } from "../utils";
 import { ShippingAddress } from "@/types";
 import { revalidatePath } from "next/cache";
-import { eq } from "drizzle-orm";
+import { count, desc, eq } from "drizzle-orm";
 import {
   paymentMethodSchema,
   shippingAddressSchema,
@@ -16,8 +16,9 @@ import {
   signUpFormSchema,
 } from "../validator";
 import { z } from "zod";
+import { PAGE_SIZE } from "../constants";
 
-// USER
+// AUTH
 export async function signUp(prevState: unknown, formData: FormData) {
   try {
     const user = signUpFormSchema.parse({
@@ -26,21 +27,24 @@ export async function signUp(prevState: unknown, formData: FormData) {
       password: formData.get("password"),
       confirmPassword: formData.get("confirmPassword"),
     });
+
     const values = {
       id: crypto.randomUUID(),
       ...user,
       password: hashSync(user.password, 10),
     };
+
     await db.insert(users).values(values);
+
     await signIn("credentials", {
       email: user.email,
       password: user.password,
     });
+
     return { success: true, message: "User created successfully" };
   } catch (error) {
-    if (isRedirectError(error)) {
-      throw error;
-    }
+    if (isRedirectError(error)) throw error;
+
     return {
       success: false,
       message: formatError(error).includes(
@@ -61,12 +65,13 @@ export async function signInWithCredentials(
       email: formData.get("email"),
       password: formData.get("password"),
     });
+
     await signIn("credentials", user);
+
     return { success: true, message: "Sign in successfully" };
   } catch (error) {
-    if (isRedirectError(error)) {
-      throw error;
-    }
+    if (isRedirectError(error)) throw error;
+
     return { success: false, message: "Invalid email or password" };
   }
 }
@@ -75,14 +80,39 @@ export const SignOut = async () => {
   await signOut();
 };
 
+// GET
+export async function getAllUsers({
+  limit = PAGE_SIZE,
+  page,
+}: {
+  limit?: number;
+  page: number;
+}) {
+  const data = await db.query.users.findMany({
+    orderBy: [desc(users.createdAt)],
+    limit,
+    offset: (page - 1) * limit,
+  });
+
+  const dataCount = await db.select({ count: count() }).from(users);
+
+  return {
+    data,
+    totalPages: Math.ceil(dataCount[0].count / limit),
+  };
+}
+
 export async function getUserById(userId: string) {
   const user = await db.query.users.findFirst({
     where: (users, { eq }) => eq(users.id, userId),
   });
+
   if (!user) throw new Error("User not found");
+
   return user;
 }
 
+// UPDATE
 export async function updateUserAddress(data: ShippingAddress) {
   try {
     const session = await auth();
@@ -150,6 +180,22 @@ export async function updateProfile(user: { name: string; email: string }) {
     return {
       success: true,
       message: "User updated successfully",
+    };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
+}
+
+// DELETE
+export async function deleteUser(id: string) {
+  try {
+    await db.delete(users).where(eq(users.id, id));
+
+    revalidatePath("/admin/users");
+
+    return {
+      success: true,
+      message: "User deleted successfully",
     };
   } catch (error) {
     return { success: false, message: formatError(error) };
