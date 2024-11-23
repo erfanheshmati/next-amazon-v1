@@ -58,7 +58,7 @@ export default async function AdminProductsPage({
               <TableHead>CATEGORY</TableHead>
               <TableHead>STOCK</TableHead>
               <TableHead>RATING</TableHead>
-              <TableHead>ACTIONS</TableHead>
+              <TableHead className="text-center">ACTIONS</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -69,9 +69,9 @@ export default async function AdminProductsPage({
                 <TableCell>{formatCurrency(product.price)}</TableCell>
                 <TableCell>{product.category}</TableCell>
                 <TableCell>{product.stock}</TableCell>
-                <TableCell>{product.rating}</TableCell>
+                <TableCell>{Number(product.rating).toFixed(1)}</TableCell>
                 <TableCell>
-                  <div className="flex gap-1">
+                  <div className="flex justify-center gap-1">
                     <Button asChild variant="outline" size="sm">
                       <Link href={`/admin/products/${product.id}`}>Edit</Link>
                     </Button>

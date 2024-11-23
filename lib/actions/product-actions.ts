@@ -8,6 +8,25 @@ import { and, count, eq, ilike, sql } from "drizzle-orm/sql";
 import { PAGE_SIZE } from "../constants";
 import { formatError } from "../utils";
 import { revalidatePath } from "next/cache";
+import { insertProductSchema, updateProductSchema } from "../validator";
+import { z } from "zod";
+
+// CREATE
+export async function createProduct(data: z.infer<typeof insertProductSchema>) {
+  try {
+    const product = insertProductSchema.parse(data);
+    await db.insert(products).values(product);
+
+    revalidatePath("/admin/products");
+
+    return {
+      success: true,
+      message: "Product created successfully",
+    };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
+}
 
 // GET
 export async function getLatestProducts() {
@@ -91,6 +110,12 @@ export async function getAllProducts({
   };
 }
 
+export async function getProductById(productId: string) {
+  return await db.query.products.findFirst({
+    where: eq(products.id, productId),
+  });
+}
+
 // DELETE
 export async function deleteProduct(id: string) {
   try {
@@ -106,6 +131,25 @@ export async function deleteProduct(id: string) {
     return {
       success: true,
       message: "Product deleted successfully",
+    };
+  } catch (error) {
+    return { success: false, message: formatError(error) };
+  }
+}
+
+// UPDATE
+export async function updateProduct(data: z.infer<typeof updateProductSchema>) {
+  try {
+    const product = updateProductSchema.parse(data);
+    const productExists = await db.query.products.findFirst({
+      where: eq(products.id, product.id),
+    });
+    if (!productExists) throw new Error("Product not found");
+    await db.update(products).set(product).where(eq(products.id, product.id));
+    revalidatePath("/admin/products");
+    return {
+      success: true,
+      message: "Product updated successfully",
     };
   } catch (error) {
     return { success: false, message: formatError(error) };

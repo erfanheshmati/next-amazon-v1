@@ -10,7 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { useToast } from "@/hooks/use-toast";
+import { useToast } from "@/components/hooks/use-toast";
 import {
   approvePayPalOrder,
   createPayPalOrder,
@@ -86,7 +86,7 @@ export default function OrderDetailsForm({
   const MarkAsPaidButton = () => {
     const [isPending, startTransition] = useTransition();
     const { toast } = useToast();
-    
+
     return (
       <Button
         type="button"
