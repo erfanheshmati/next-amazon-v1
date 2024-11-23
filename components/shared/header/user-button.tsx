@@ -7,8 +7,10 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { SignOut } from "@/lib/actions/user-actions";
+import { LogOut, UserRound, MonitorCog } from "lucide-react";
 
 export default async function UserButton() {
   const session = await auth();
@@ -58,22 +60,24 @@ export default async function UserButton() {
             </div>
           </DropdownMenuLabel>
 
-          <DropdownMenuItem>
-            <Link className="w-full" href="/user/profile">
-              Profile
-            </Link>
-          </DropdownMenuItem>
+          <DropdownMenuSeparator />
 
           <DropdownMenuItem>
-            <Link className="w-full" href="/user/orders">
-              Order History
+            <Link className="w-full" href="/user/profile">
+              <span className="flex items-center gap-1">
+                <UserRound size={16} />
+                User profile
+              </span>
             </Link>
           </DropdownMenuItem>
 
           {session.user.role === "admin" && (
             <DropdownMenuItem>
               <Link className="w-full" href="/admin/overview">
-                Admin
+                <span className="flex items-center gap-1">
+                  <MonitorCog size={16} />
+                  Admin panel
+                </span>
               </Link>
             </DropdownMenuItem>
           )}
@@ -84,7 +88,10 @@ export default async function UserButton() {
                 className="w-full py-4 px-2 h-4 justify-start"
                 variant="ghost"
               >
-                Sign out
+                <span className="flex items-center gap-1">
+                  <LogOut size={16} />
+                  Sign out
+                </span>
               </Button>
             </form>
           </DropdownMenuItem>
