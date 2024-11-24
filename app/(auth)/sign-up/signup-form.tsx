@@ -41,7 +41,7 @@ export default function SignUpForm() {
     <form action={action}>
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
       <div className="space-y-4">
-        <div>
+        <div className="space-y-1">
           <Label htmlFor="name">Name</Label>
           <Input
             id="name"
@@ -52,7 +52,7 @@ export default function SignUpForm() {
             defaultValue={signUpDefaultValues.name}
           />
         </div>
-        <div>
+        <div className="space-y-1">
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
@@ -63,7 +63,7 @@ export default function SignUpForm() {
             defaultValue={signUpDefaultValues.email}
           />
         </div>
-        <div className="relative">
+        <div className="relative space-y-1">
           <Label htmlFor="password">Password</Label>
           <Input
             id="password"
@@ -81,7 +81,7 @@ export default function SignUpForm() {
             {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
           </button>
         </div>
-        <div className="relative">
+        <div className="relative space-y-1">
           <Label htmlFor="confirmPassword">Confirm Password</Label>
           <Input
             id="confirmPassword"

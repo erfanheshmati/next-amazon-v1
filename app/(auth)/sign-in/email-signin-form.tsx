@@ -19,7 +19,7 @@ export default function EmailSigninForm() {
   return (
     <form action={SignInWithEmail}>
       <div className="space-y-4">
-        <div className="space-y-2">
+        <div className="space-y-1">
           <Label htmlFor="user_email">Email</Label>
           <Input
             type="email"

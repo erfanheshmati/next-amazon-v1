@@ -10,6 +10,7 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { APP_NAME, SENDER_EMAIL } from "./lib/constants";
 import Resend from "next-auth/providers/resend";
+import Google from "next-auth/providers/google";
 
 export const config = {
   pages: {
@@ -54,6 +55,9 @@ export const config = {
       name: "Email",
       from: `${APP_NAME} <${SENDER_EMAIL}>`,
       id: "email",
+    }),
+    Google({
+      allowDangerousEmailAccountLinking: false,
     }),
   ],
   callbacks: {

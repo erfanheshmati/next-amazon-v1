@@ -37,7 +37,7 @@ export default function CredentialsSignInForm() {
     <form action={action}>
       <input type="hidden" name="callbackUrl" value={callbackUrl} />
       <div className="space-y-4">
-        <div>
+        <div className="space-y-1">
           <Label htmlFor="email">Email</Label>
           <Input
             id="email"
@@ -50,23 +50,25 @@ export default function CredentialsSignInForm() {
           />
         </div>
         <div className="relative">
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            type={showPassword ? "text" : "password"}
-            defaultValue={signInDefaultValues.password}
-            autoComplete="off"
-            required
-          />
-          <button
-            type="button"
-            onClick={togglePasswordVisibility}
-            className="absolute inset-y-1/2 right-2 text-2xl text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300"
-          >
-            {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
-          </button>
+          <div className="space-y-1">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              type={showPassword ? "text" : "password"}
+              defaultValue={signInDefaultValues.password}
+              autoComplete="off"
+              required
+            />
+            <button
+              type="button"
+              onClick={togglePasswordVisibility}
+              className="absolute inset-y-1/2 right-2 text-2xl text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300"
+            >
+              {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
+            </button>
+          </div>
         </div>
 
         <div className="pt-2">

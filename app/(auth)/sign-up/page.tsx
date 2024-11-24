@@ -30,7 +30,7 @@ export default async function SignUp({
   }
 
   return (
-    <div className="w-full max-w-md mx-auto">
+    <div className="w-full max-w-md mx-auto my-5">
       <Card>
         <CardHeader className="space-y-4">
           <Link href="/" className="flex-center">

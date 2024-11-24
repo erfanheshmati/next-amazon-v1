@@ -14,6 +14,7 @@ import { APP_NAME } from "@/lib/constants";
 import CredentialsSignInForm from "./credentials-signin-form";
 import EmailSigninForm from "./email-signin-form";
 import SeparatorWithOr from "@/components/shared/separator-or";
+import GoogleSignInForm from "./google-signin-form";
 
 export const metadata: Metadata = {
   title: `Sign in - ${APP_NAME}`,
@@ -33,7 +34,7 @@ export default async function SignIn({
   }
 
   return (
-    <div className="w-full max-w-md mx-auto px-4 md:px-0">
+    <div className="w-full max-w-md mx-auto my-5">
       <Card>
         <CardHeader className="space-y-3">
           <Link href="/" className="flex-center">
@@ -50,6 +51,10 @@ export default async function SignIn({
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <GoogleSignInForm />
+
+          <SeparatorWithOr />
+
           <EmailSigninForm />
 
           <SeparatorWithOr />
