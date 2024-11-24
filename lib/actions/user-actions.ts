@@ -77,6 +77,10 @@ export async function signInWithCredentials(
   }
 }
 
+export const SignInWithEmail = async (formData: any) => {
+  await signIn("email", formData);
+};
+
 export const SignOut = async () => {
   await signOut();
 };
@@ -195,16 +199,16 @@ export async function updateUser(user: z.infer<typeof updateUserSchema>) {
         name: user.name,
         role: user.role,
       })
-      .where(eq(users.id, user.id))
+      .where(eq(users.id, user.id));
 
-    revalidatePath('/admin/users')
-    
+    revalidatePath("/admin/users");
+
     return {
       success: true,
-      message: 'User updated successfully',
-    }
+      message: "User updated successfully",
+    };
   } catch (error) {
-    return { success: false, message: formatError(error) }
+    return { success: false, message: formatError(error) };
   }
 }
 

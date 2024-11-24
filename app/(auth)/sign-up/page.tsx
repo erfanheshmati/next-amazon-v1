@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/card";
 
 export const metadata: Metadata = {
-  title: `Sign Up - ${APP_NAME}`,
+  title: `Sign up - ${APP_NAME}`,
 };
 
 export default async function SignUp({

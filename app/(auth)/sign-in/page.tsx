@@ -12,9 +12,11 @@ import {
 } from "@/components/ui/card";
 import { APP_NAME } from "@/lib/constants";
 import CredentialsSignInForm from "./credentials-signin-form";
+import EmailSigninForm from "./email-signin-form";
+import SeparatorWithOr from "@/components/shared/separator-or";
 
 export const metadata: Metadata = {
-  title: `Sign In - ${APP_NAME}`,
+  title: `Sign in - ${APP_NAME}`,
 };
 
 export default async function SignIn({
@@ -25,7 +27,7 @@ export default async function SignIn({
   };
 }) {
   const session = await auth();
-  
+
   if (session) {
     return redirect(callbackUrl || "/");
   }
@@ -48,6 +50,10 @@ export default async function SignIn({
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <EmailSigninForm />
+
+          <SeparatorWithOr />
+
           <CredentialsSignInForm />
         </CardContent>
       </Card>

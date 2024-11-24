@@ -28,7 +28,7 @@ export default function CredentialsSignInForm() {
     const { pending } = useFormStatus();
     return (
       <Button disabled={pending} className="w-full" variant="default">
-        {pending ? "Submitting..." : "Sign In with credentials"}
+        {pending ? "Submitting..." : "Sign in with credentials"}
       </Button>
     );
   };
@@ -63,7 +63,7 @@ export default function CredentialsSignInForm() {
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="absolute right-2 top-8 text-2xl text-gray-600 hover:text-black"
+            className="absolute inset-y-1/2 right-2 text-2xl text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300"
           >
             {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
           </button>
@@ -90,7 +90,7 @@ export default function CredentialsSignInForm() {
           <Link
             href={`/sign-up?callbackUrl=${encodeURIComponent(callbackUrl)}`}
             target="_self"
-            className="link hover:opacity-80"
+            className="link hover:text-gray-800"
           >
             Sign up
           </Link>

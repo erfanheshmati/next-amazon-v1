@@ -76,7 +76,7 @@ export default function SignUpForm() {
           <button
             type="button"
             onClick={togglePasswordVisibility}
-            className="absolute right-2 top-8 text-2xl text-gray-600 hover:text-black"
+            className="absolute right-2 top-8 text-2xl text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300"
           >
             {showPassword ? <EyeOff size={22} /> : <Eye size={22} />}
           </button>
@@ -94,7 +94,7 @@ export default function SignUpForm() {
           <button
             type="button"
             onClick={toggleConfirmPasswordVisibility}
-            className="absolute right-2 top-8 text-2xl text-gray-600 hover:text-black"
+            className="absolute right-2 top-8 text-2xl text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-300"
           >
             {showConfirmPassword ? <EyeOff size={22} /> : <Eye size={22} />}
           </button>
@@ -113,7 +113,7 @@ export default function SignUpForm() {
           <Link
             href={`/sign-in?callbackUrl=${callbackUrl}`}
             target="_self"
-            className="link hover:opacity-80"
+            className="link hover:text-gray-800"
           >
             Sign in
           </Link>

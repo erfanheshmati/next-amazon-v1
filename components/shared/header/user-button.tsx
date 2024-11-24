@@ -91,7 +91,7 @@ export default async function UserButton() {
             <DropdownMenuSubTrigger>
               <span className="flex items-center gap-1">
                 <Palette size={16} />
-                Theme toggle
+                Toggle theme
               </span>
             </DropdownMenuSubTrigger>
             <DropdownMenuPortal>
