@@ -34,7 +34,7 @@ const ProductCard = ({ product }: { product: Product }) => {
         </div>
         <div className="flex-between gap-4">
           <p className="flex items-center gap-1">
-            <span className="text-yellow-500 text-lg font-bold">★</span>
+            <span className="text-yellow-500 text-xl font-bold">★</span>
             <span className="text-sm">{Number(product.rating).toFixed(1)}</span>
           </p>
           {product.stock > 0 ? (

@@ -40,7 +40,7 @@ export default function ProductCarousel({ data }: { data: Product[] }) {
                 className="w-full h-auto"
               />
               <div className="absolute inset-0 flex items-end justify-center">
-                <h2 className="w-full text-center bg-gray-900 bg-opacity-40 backdrop-blur-sm text-sm sm:text-xl md:text-2xl font-bold px-3 py-1 text-white">
+                <h2 className="w-full text-center bg-gray-900 bg-opacity-20 backdrop-blur-sm text-sm sm:text-xl md:text-2xl font-bold px-3 py-1 text-white">
                   {product.name}
                 </h2>
               </div>
