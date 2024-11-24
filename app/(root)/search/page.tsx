@@ -114,7 +114,7 @@ export default async function SearchPage({
 
   return (
     <div className="grid md:grid-cols-5 md:gap-5">
-      <div className="bg-gray-100 bg-opacity-60 rounded-md px-3 pt-1 pb-3">
+      <div className="bg-gray-100 dark:bg-opacity-10 rounded-md px-3 pt-1 pb-3">
         <div className="text-xl pt-3">Department</div>
         <div>
           <ul>

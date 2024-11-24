@@ -21,7 +21,7 @@ const ProductCard = ({ product }: { product: Product }) => {
       </CardHeader>
       <CardContent className="p-3 grid gap-3 w-3/5 sm:w-full">
         <div>
-          <p className="text-xs bg-gray-100 w-fit rounded px-2 py-1">
+          <p className="text-xs bg-gray-100 dark:bg-gray-600 w-fit rounded px-2 py-1">
             {product.brand}
           </p>
         </div>

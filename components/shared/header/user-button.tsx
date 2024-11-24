@@ -8,9 +8,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
+  DropdownMenuSubTrigger,
+  DropdownMenuSub,
+  DropdownMenuPortal,
+  DropdownMenuSubContent,
 } from "@/components/ui/dropdown-menu";
 import { SignOut } from "@/lib/actions/user-actions";
-import { LogOut, UserRound, MonitorCog } from "lucide-react";
+import { LogOut, UserRound, MonitorCog, Palette } from "lucide-react";
+import ThemeToggle from "./theme-toggle";
 
 export default async function UserButton() {
   const session = await auth();
@@ -42,7 +47,7 @@ export default async function UserButton() {
           <div className="flex items-center">
             <Button
               variant="ghost"
-              className="relative w-8 h-8 rounded-full bg-gray-100 p-5 hover:bg-gray-200"
+              className="relative w-8 h-8 rounded-full p-5 bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-800"
             >
               {userInitials(session.user.name)}
             </Button>
@@ -62,15 +67,6 @@ export default async function UserButton() {
 
           <DropdownMenuSeparator />
 
-          <DropdownMenuItem>
-            <Link className="w-full" href="/user/profile">
-              <span className="flex items-center gap-1">
-                <UserRound size={16} />
-                User profile
-              </span>
-            </Link>
-          </DropdownMenuItem>
-
           {session.user.role === "admin" && (
             <DropdownMenuItem>
               <Link className="w-full" href="/admin/overview">
@@ -81,6 +77,29 @@ export default async function UserButton() {
               </Link>
             </DropdownMenuItem>
           )}
+
+          <DropdownMenuItem>
+            <Link className="w-full" href="/user/profile">
+              <span className="flex items-center gap-1">
+                <UserRound size={16} />
+                User profile
+              </span>
+            </Link>
+          </DropdownMenuItem>
+
+          <DropdownMenuSub>
+            <DropdownMenuSubTrigger>
+              <span className="flex items-center gap-1">
+                <Palette size={16} />
+                Theme toggle
+              </span>
+            </DropdownMenuSubTrigger>
+            <DropdownMenuPortal>
+              <DropdownMenuSubContent className="mx-1">
+                <ThemeToggle />
+              </DropdownMenuSubContent>
+            </DropdownMenuPortal>
+          </DropdownMenuSub>
 
           <DropdownMenuItem className="p-0 mb-1">
             <form action={SignOut} className="w-full">

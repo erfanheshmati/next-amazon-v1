@@ -40,7 +40,7 @@ export default function ProductCarousel({ data }: { data: Product[] }) {
                 className="w-full h-auto"
               />
               <div className="absolute inset-0 flex items-end justify-center">
-                <h2 className="w-full text-center bg-gray-900 bg-opacity-20 backdrop-blur-sm text-sm sm:text-xl md:text-2xl font-bold px-3 py-1 text-white">
+                <h2 className="w-full text-center bg-gray-900/20 dark:bg-gray-900/60 backdrop-blur-sm text-sm sm:text-xl md:text-2xl font-bold px-3 py-1 text-white">
                   {product.name}
                 </h2>
               </div>
@@ -48,8 +48,8 @@ export default function ProductCarousel({ data }: { data: Product[] }) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="absolute left-1 text-gray-600" />
-      <CarouselNext className="absolute right-1 text-gray-600" />
+      <CarouselPrevious className="absolute left-1 text-gray-600 dark:text-gray-100 dark:border-none" />
+      <CarouselNext className="absolute right-1 text-gray-600 dark:text-gray-100 dark:border-none" />
     </Carousel>
   );
 }
