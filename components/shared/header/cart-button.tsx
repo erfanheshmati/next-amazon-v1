@@ -13,7 +13,7 @@ export default async function CartButton() {
       <Link href="/cart" className="relative">
         <ShoppingCart />
         {cart && cart.items.length > 0 && (
-          <Badge className="absolute top-0 right-0 w-6 h-5 flex justify-center items-center">
+          <Badge className="absolute top-0 right-0 w-5 h-5 flex justify-center items-center">
             {cart.items.reduce((a, c) => a + c.qty, 0)}
           </Badge>
         )}

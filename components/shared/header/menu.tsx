@@ -4,8 +4,8 @@ import CartButton from "./cart-button";
 const Menu = () => {
   return (
     <>
-      <div className="flex justify-end gap-3">
-        <nav className="flex w-full max-w-xs gap-2">
+      <div className="flex justify-end">
+        <nav className="flex gap-2">
           <CartButton />
           <UserButton />
         </nav>
